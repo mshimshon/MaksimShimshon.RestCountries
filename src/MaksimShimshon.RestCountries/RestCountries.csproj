@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFrameworks>net8.0;net6.0;net9.0</TargetFrameworks>
+	<ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<AssemblyName>MaksimShimshon.RestCountries</AssemblyName>
+	<RootNamespace>MaksimShimshon.RestCountries</RootNamespace>
+	<Title>RestCountries for .NET</Title>
+	<Description>A C# port of the RestCountries Java API, fully compatible with the original JSON structure, adapted for ASP.NET dependency injection, and providing country data, including time zones, languages, currencies, and translations.</Description>
+	<Version>0.9.4</Version>
+	<Authors>Maksim Shimshon</Authors>
+	<Copyright>Maksim Shimshon © 2025</Copyright>
+	<PackageProjectUrl>https://github.com/OpenCodeDev/MaksimShimshon.RestCountries</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/OpenCodeDev/MaksimShimshon.RestCountries</RepositoryUrl>
+	<ApplicationIcon>restcountries_logo.ico</ApplicationIcon>
+	<NuGetAuditMode>all</NuGetAuditMode>
+	<NuGetAuditLevel>high</NuGetAuditLevel>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<PackageIcon>restcountries_logo.png</PackageIcon>
+	<PackageReadmeFile>readme.md</PackageReadmeFile>
+	<RepositoryType>git</RepositoryType>
+	<PackageTags>RestCountries, .NET8, Countries, Postal Codes</PackageTags>
+	<NeutralLanguage>en</NeutralLanguage>
+	<AssemblyVersion>$(Version)</AssemblyVersion>
+	<FileVersion>$(Version)</FileVersion>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageReleaseNotes>- Remove File Artifacts
+- Added Compatibility for .NET 6.0 and .NET 9.0</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstardard2.1'">
+	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
+	  <Content Include="restcountries_logo.ico" />
+  </ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstardard2.1'">
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<Folder Include="Entities\NewFolder\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\restcountries_logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+
+
+</Project>

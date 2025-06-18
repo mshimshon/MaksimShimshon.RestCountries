@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFrameworks>net8.0;net6.0;net9.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <AssemblyName>MaksimShimshon.RestCountries.Embedded</AssemblyName>
+	  <RootNamespace>MaksimShimshon.RestCountries.Embedded</RootNamespace>
+	  <Title>RestCountries Embedded for .NET</Title>
+	  <Description>An additional package, recommended for server use only, dependent on the C# RestCountries port, providing versioned country data for instant access and easy installation.</Description>
+	  <Version>0.9.4</Version>
+	  <Authors>Maksim Shimshon</Authors>
+	  <Copyright>Maksim Shimshon © 2025</Copyright>
+	  <PackageProjectUrl>https://github.com/OpenCodeDev/MaksimShimshon.RestCountries</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/OpenCodeDev/MaksimShimshon.RestCountries</RepositoryUrl>
+	  <ApplicationIcon>restcountries_logo.ico</ApplicationIcon>
+	  <NuGetAuditMode>all</NuGetAuditMode>
+	  <NuGetAuditLevel>high</NuGetAuditLevel>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <PackageIcon>restcountries_logo.png</PackageIcon>
+	  <PackageReadmeFile>readme.md</PackageReadmeFile>
+	  <RepositoryType>git</RepositoryType>
+	  <PackageTags>RestCountries, .NET8, Countries, Postal Codes</PackageTags>
+	  <NeutralLanguage>en</NeutralLanguage>
+	  <AssemblyVersion>$(Version)</AssemblyVersion>
+	  <FileVersion>$(Version)</FileVersion>
+	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <None Remove="Resources\countriesV3.1.json" />
+    <None Remove="Resources\countriesV3.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="restcountries_logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\countriesV3.1.json" />
+    <EmbeddedResource Include="Resources\countriesV3.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\restcountries_logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MaksimShimshon.RestCountries\RestCountries.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Versions.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Versions.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Versions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Versions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
