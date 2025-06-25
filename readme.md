@@ -92,7 +92,7 @@ builder.Services.AddRestCountriesServices(RestCountriesEmbed.GetVersion());
 ```
 
 # Fields
-You can check the [FIELDS.md](FIELDS.md) file to get info on each classes.
+You can check the [FIELDS.md](https://github.com/mshimshon/MaksimShimshon.RestCountries/blob/main/fields.md) file to get info on each classes.
 
 
 ## Getting Started
