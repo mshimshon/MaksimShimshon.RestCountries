@@ -1,32 +1,28 @@
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+﻿[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 
 
+# 🌍 RestCountries C# Port
+
+This C# library is a full port of the REST Countries Java API, preserving full compatibility with the original JSON structure (v3.1 and v3).
+
+It provides strongly typed access to rich country and region data, ideal for .NET developers building apps that need detailed country-related information.
+
+The package supports dependency injection for seamless integration into modern web applications. 
+
+It also includes high test coverage, making it production-ready.
 
 
-# About this Project
+## 🔑 Key Features
 
-**RestCountries C# Port**  
-
-This C# library is a full port of the RestCountries Java API, maintaining full compatibility with the original JSON data (v3.1 & v3) structure from the project.  
-
-The library provides access to comprehensive country and region information, including time zones, languages, currencies, translations, and more.  
-
-The library offers strongly typed access to country data, making it ideal for .NET developers building apps that need country-related information.  
-
-This package is specifically adapted for use with ASP.NET, supporting dependency injection for seamless integration into ASP.NET applications.  
-
-The library uses high code test coverage for production use.  
-
-Key Features:  
-- Access country data (name, capital, region, population, area, etc.)  
-- Retrieve languages, currencies, and translations of country names.  
-- Supports time zone data for each country.  
-- Simple integration with C# applications using strongly typed objects.  
-- Compatible with original RestCountries JSON data format.  
-- Fully supports ASP.NET dependency injection for clean integration into your application.
+- Access detailed country data: name, capital, region, population, area, and more
+- Retrieve languages, currencies, and translations of country names
+- Time zone support for all countries
+- Strongly typed models for easy C# integration
+- Fully compatible with original REST Countries JSON formats
+- Built-in support for ASP.NET dependency injection
 
 
-
+Perfect for apps that need reliable, structured, and localized country information.
 
 ## Important Information
 * We are supporting [REST Countries Java] (Alejandro Matos) Version 3, Version 3.1 and plan the maintain compatibility.
@@ -53,8 +49,13 @@ builder.Services.AddRestCountriesServices(RestCountriesEmbed.GetVersion());
 [![](https://img.shields.io/nuget/v/MaksimShimshon.RestCountries.Embedded?label=Latest)](https://www.nuget.org/packages/MaksimShimshon.RestCountries.Embedded)
 [![](https://img.shields.io/nuget/dt/MaksimShimshon.RestCountries?label=Downloads)](https://www.nuget.org/packages/MaksimShimshon.RestCountries)
 
-Since Embedded includes all available JSON versions, it increases the package size, which may not be ideal for front-end deployments. 
-However, it provides valuable resource files (all available versions) for server-side.
+> 📦 **Package Size Consideration**
+
+The `Embedded` package includes **all available JSON versions**, which significantly increases its size.  
+This may not be suitable for **front-end deployments** due to payload concerns.
+
+However, it is ideal for **server-side use**, where having access to multiple versions of the data can be valuable.
+
 
 ``` cs
 using MaksimShimshon.RestCountries;
@@ -64,10 +65,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRestCountriesServices(RestCountriesEmbed.GetVersion("countriesV3.1"));
 
 ```
+
 ### [MaksimShimshon.RestCountries.Data](https://www.nuget.org/packages/MaksimShimshon.RestCountries.Data)
-This pakage should not be installed along side Embedded and we've introduced a conflict on purpose (using RestCountriesEmbed as class) due to incompatibility.
-Embedded includes all available JSON versions and Data includes only the targeted version.
-Which means, the pakage version you have install will match the version available by the original JSON files.
+> ⚠️ **Important Compatibility Notice**
+
+This package **must not** be installed alongside the `MaksimShimshon.RestCountries.Embedded` package.  
+A conflict has been intentionally introduced by using the same `RestCountriesEmbed` class in both packages to avoid incompatibility.
+
+- `**Embedded**` includes **all available JSON versions**.
+- `**Data**` includes **only the targeted version**.
+
+As a result, the version of the `Data` package you install will match the version of the original REST Countries JSON data available in your project.
+
 
 ``` cs
 using MaksimShimshon.RestCountries;
