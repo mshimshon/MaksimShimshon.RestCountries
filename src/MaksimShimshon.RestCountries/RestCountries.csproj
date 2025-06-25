@@ -8,11 +8,11 @@
 	<RootNamespace>MaksimShimshon.RestCountries</RootNamespace>
 	<Title>RestCountries for .NET</Title>
 	<Description>A C# port of the RestCountries Java API, fully compatible with the original JSON structure, adapted for ASP.NET dependency injection, and providing country data, including time zones, languages, currencies, and translations.</Description>
-	<Version>0.9.4</Version>
+	<Version>0.9.41</Version>
 	<Authors>Maksim Shimshon</Authors>
 	<Copyright>Maksim Shimshon © 2025</Copyright>
-	<PackageProjectUrl>https://github.com/OpenCodeDev/MaksimShimshon.RestCountries</PackageProjectUrl>
-	<RepositoryUrl>https://github.com/OpenCodeDev/MaksimShimshon.RestCountries</RepositoryUrl>
+	<PackageProjectUrl>https://github.com/mshimshon/MaksimShimshon.RestCountries</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/mshimshon/MaksimShimshon.RestCountries</RepositoryUrl>
 	<ApplicationIcon>restcountries_logo.ico</ApplicationIcon>
 	<NuGetAuditMode>all</NuGetAuditMode>
 	<NuGetAuditLevel>high</NuGetAuditLevel>
@@ -25,8 +25,7 @@
 	<AssemblyVersion>$(Version)</AssemblyVersion>
 	<FileVersion>$(Version)</FileVersion>
 	<PackageLicenseFile>LICENSE</PackageLicenseFile>
-	<PackageReleaseNotes>- Remove File Artifacts
-- Added Compatibility for .NET 6.0 and .NET 9.0</PackageReleaseNotes>
+	<PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'netstardard2.1'">
@@ -57,6 +56,12 @@
 		</None>
 	</ItemGroup>
 
-
+	<Target Name="CopyNuPkg" AfterTargets="Pack" Condition="'$(Configuration)' == 'Release'">
+		<MakeDir Directories="..\..\..\..\nupkgs" />
+		<ItemGroup>
+			<PackageFiles Include="$(PackageOutputPath)$(PackageId).$(PackageVersion).nupkg" />
+		</ItemGroup>
+		<Copy SourceFiles="@(PackageFiles)" DestinationFolder="..\..\..\..\nupkgs" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="false" />
+	</Target>
 
 </Project>
