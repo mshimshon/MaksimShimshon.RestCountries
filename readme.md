@@ -67,6 +67,10 @@ builder.Services.AddRestCountriesServices(RestCountriesEmbed.GetVersion("countri
 ```
 
 ### [MaksimShimshon.RestCountries.Data](https://www.nuget.org/packages/MaksimShimshon.RestCountries.Data)
+
+[![](https://img.shields.io/nuget/v/MaksimShimshon.RestCountries.Data?label=Latest)](https://www.nuget.org/packages/MaksimShimshon.RestCountries.Data) 
+[![](https://img.shields.io/nuget/dt/MaksimShimshon.RestCountries.Data?label=Downloads)](https://www.nuget.org/packages/MaksimShimshon.RestCountries.Data)
+
 > ⚠️ **Important Compatibility Notice**
 
 This package **must not** be installed alongside the `MaksimShimshon.RestCountries.Embedded` package.  
