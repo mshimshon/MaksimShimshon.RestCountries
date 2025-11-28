@@ -1,5 +1,6 @@
 ﻿[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
-
+[![NuGet Version](https://img.shields.io/nuget/v/MaksimShimshon.RestCountries)](https://www.nuget.org/packages/MaksimShimshon.RestCountries)
+[![](https://img.shields.io/nuget/dt/MaksimShimshon.RestCountries?label=Downloads)](https://www.nuget.org/packages/MaksimShimshon.RestCountries)
 
 # 🌍 RestCountries C# Port
 
