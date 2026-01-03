@@ -51,7 +51,7 @@ jobs:
       - name: Get package version
         id: get_version
         run: |
-          FILE=$(ls ./artifacts/CoreMap.*.nupkg | head -n1)
+          FILE=$(ls ./artifacts/*.nupkg | head -n1)
           VERSION=$(basename "$FILE" | sed -E 's/CoreMap\.([0-9]+\.[0-9]+\.[0-9]+)\.nupkg/\1/')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
