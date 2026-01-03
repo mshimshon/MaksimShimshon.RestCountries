@@ -13,11 +13,10 @@
 	  <Copyright>$(GlobalCopyright)</Copyright>
 	  <PackageProjectUrl>https://github.com/mshimshon/MaksimShimshon.RestCountries</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/mshimshon/MaksimShimshon.RestCountries</RepositoryUrl>
-	  <ApplicationIcon>restcountries_logo.ico</ApplicationIcon>
 	  <NuGetAuditMode>all</NuGetAuditMode>
 	  <NuGetAuditLevel>high</NuGetAuditLevel>
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	  <PackageIcon>restcountries_logo.png</PackageIcon>
+	  <PackageIcon>icon.png</PackageIcon>
 	  <PackageReadmeFile>readme.md</PackageReadmeFile>
 	  <RepositoryType>git</RepositoryType>
 	  <PackageTags>RestCountries, .NET8, Countries, Postal Codes</PackageTags>
@@ -33,28 +32,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="restcountries_logo.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="Resources\countriesV3.1.json" />
     <EmbeddedResource Include="Resources\countriesV3.json" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\..\readme.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\..\restcountries_logo.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="../../icon.png" Pack="true" PackagePath="" />
+		<None Include="../../LICENSE" Pack="true" PackagePath="" />
+		<None Include="../../readme.md" Pack="true" PackagePath="" />
+	</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MaksimShimshon.RestCountries\RestCountries.csproj" />
@@ -80,6 +65,6 @@
 		<ItemGroup>
 			<PackageFiles Include="$(PackageOutputPath)$(PackageId).$(PackageVersion).nupkg" />
 		</ItemGroup>
-		<Copy SourceFiles="@(PackageFiles)" DestinationFolder="..\..\..\..\nupkgs" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="false" Condition="'$(BuildingInsideVisualStudio)' == 'true'"  />
+		<Copy SourceFiles="@(PackageFiles)" DestinationFolder="..\..\..\..\nupkgs" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="false" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
 	</Target>
 </Project>
