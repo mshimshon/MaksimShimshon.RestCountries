@@ -63,7 +63,9 @@ jobs:
           max_attempts: 30
           command: |
             curl -s "https://api.nuget.org/v3/registration5-gz-semver2/maksimshimshon.restcountries/index.json" \
-              | grep -q "\"version\":\"${{ steps.get_version.outputs.version }}\""
+              | jq -e --arg ver "${{ steps.get_version.outputs.version }}" \
+                '[.items[].items[].catalogEntry.version | ascii_downcase] | any(. == ($ver | ascii_downcase))'
+
 
 
   deploy-RestCountries-Data:
