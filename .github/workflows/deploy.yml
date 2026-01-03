@@ -40,6 +40,8 @@ jobs:
         run: dotnet pack src/MaksimShimshon.RestCountries/RestCountries.csproj -c Release --no-build -o ./artifacts
       
       - name: Push RestCountries
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: dotnet nuget push ./artifacts/MaksimShimshon.RestCountries.*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
       
       - name: Wait for NuGet indexing
@@ -79,6 +81,8 @@ jobs:
         run: dotnet pack src/MaksimShimshon.RestCountries.Data/RestCountries.Data.csproj -c Release --no-build -o ./artifacts
       
       - name: Push RestCountries.Data
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: dotnet nuget push ./artifacts/MaksimShimshon.RestCountries.Data.*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
       
   deploy-RestCountries-Embedded:
@@ -115,6 +119,8 @@ jobs:
         run: dotnet pack src/MaksimShimshon.RestCountries.Embedded/RestCountries.Embedded.csproj -c Release --no-build -o ./artifacts
       
       - name: Push RestCountries.Embedded
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: dotnet nuget push ./artifacts/MaksimShimshon.RestCountries.Embedded.*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
       
   create-github-release:
