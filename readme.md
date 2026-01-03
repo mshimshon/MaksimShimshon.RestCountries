@@ -79,7 +79,7 @@ This package **must not** be installed alongside the `MaksimShimshon.RestCountri
 A conflict has been intentionally introduced by using the same `RestCountriesEmbed` class in both packages to avoid incompatibility.
 
 - `**Embedded**` includes **all available JSON versions**.
-- `**Data**` includes **only the targeted version reflected on the package version**.
+- `**Data**` includes **only the targeted on the latest version**.
 
 As a result, the version of the `Data` package you install will match the version the latest version.
 
