@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>net8.0;net6.0;net9.0</TargetFrameworks>
+	<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	  <AssemblyName>MaksimShimshon.RestCountries.Embedded</AssemblyName>
 	  <RootNamespace>MaksimShimshon.RestCountries.Embedded</RootNamespace>
 	  <Title>RestCountries Embedded for .NET</Title>
 	  <Description>An additional package, recommended for server use only, dependent on the C# RestCountries port, providing versioned country data for instant access and easy installation.</Description>
-	  <Version>0.9.41</Version>
+	  <Version>$(GlobalVersion)</Version>
 	  <Authors>Maksim Shimshon</Authors>
-	  <Copyright>Maksim Shimshon © 2025</Copyright>
+	  <Copyright>$(GlobalCopyright)</Copyright>
 	  <PackageProjectUrl>https://github.com/mshimshon/MaksimShimshon.RestCountries</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/mshimshon/MaksimShimshon.RestCountries</RepositoryUrl>
 	  <ApplicationIcon>restcountries_logo.ico</ApplicationIcon>

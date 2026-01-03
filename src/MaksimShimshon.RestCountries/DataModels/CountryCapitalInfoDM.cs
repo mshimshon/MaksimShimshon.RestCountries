@@ -1,7 +1,6 @@
-﻿namespace MaksimShimshon.RestCountries.DataModels
+﻿namespace MaksimShimshon.RestCountries.DataModels;
+
+public record class CountryCapitalInfoDM
 {
-    public record class CountryCapitalInfoDM
-    {
-        public double[] LATLNG { get; init; } = null!;
-    }
+    public double[] LATLNG { get; init; } = null!;
 }

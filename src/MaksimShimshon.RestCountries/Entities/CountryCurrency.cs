@@ -1,9 +1,8 @@
-﻿namespace MaksimShimshon.RestCountries.Entities
+﻿namespace MaksimShimshon.RestCountries.Entities;
+
+public record class CountryCurrency
 {
-    public record class CountryCurrency
-    {
-        public string Code { get; init; } = null!;
-        public string Name { get; init; } = null!;
-        public string Symbol { get; init; } = null!;
-    }
+    public string Code { get; init; } = null!;
+    public string Name { get; init; } = null!;
+    public string Symbol { get; init; } = null!;
 }

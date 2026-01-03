@@ -1,9 +1,8 @@
-﻿namespace MaksimShimshon.RestCountries.Entities
+﻿namespace MaksimShimshon.RestCountries.Entities;
+
+public record class CountryName
 {
-    public record class CountryName
-    {
-        public string Common { get; init; } = null!;
-        public string Official { get; init; } = null!;
-        public string LanguageCode { get; init; } = null!;
-    }
+    public string Common { get; init; } = null!;
+    public string Official { get; init; } = null!;
+    public string LanguageCode { get; init; } = null!;
 }

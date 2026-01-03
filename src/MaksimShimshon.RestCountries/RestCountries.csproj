@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>net8.0;net6.0;net9.0</TargetFrameworks>
+	<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 	<ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<AssemblyName>MaksimShimshon.RestCountries</AssemblyName>
 	<RootNamespace>MaksimShimshon.RestCountries</RootNamespace>
 	<Title>RestCountries for .NET</Title>
 	<Description>A C# port of the RestCountries Java API, fully compatible with the original JSON structure, adapted for ASP.NET dependency injection, and providing country data, including time zones, languages, currencies, and translations.</Description>
-	<Version>0.9.41</Version>
+	<Version>$(GlobalVersion)</Version>
 	<Authors>Maksim Shimshon</Authors>
-	<Copyright>Maksim Shimshon © 2025</Copyright>
+	<Copyright>$(GlobalCopyright)</Copyright>
 	<PackageProjectUrl>https://github.com/mshimshon/MaksimShimshon.RestCountries</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/mshimshon/MaksimShimshon.RestCountries</RepositoryUrl>
 	<ApplicationIcon>restcountries_logo.ico</ApplicationIcon>
@@ -28,17 +28,9 @@
 	<PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'netstardard2.1'">
-	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
-	  <Content Include="restcountries_logo.ico" />
-  </ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'netstardard2.1'">
-		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-	</ItemGroup>
-	
 	<ItemGroup>
-		<Folder Include="Entities\NewFolder\" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -55,6 +47,7 @@
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
+
 
 	<Target Name="CopyNuPkg" AfterTargets="Pack" Condition="'$(Configuration)' == 'Release'">
 		<MakeDir Directories="..\..\..\..\nupkgs" />

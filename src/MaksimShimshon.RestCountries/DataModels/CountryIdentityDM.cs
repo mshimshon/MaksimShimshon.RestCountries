@@ -1,8 +1,7 @@
-﻿namespace MaksimShimshon.RestCountries.DataModels
+﻿namespace MaksimShimshon.RestCountries.DataModels;
+
+public record class CountryIdentityDM
 {
-    public record class CountryIdentityDM
-    {
-        public string Root { get; init; } = null!;
-        public List<string> Suffixes { get; init; } = null!;
-    }
+    public string Root { get; init; } = null!;
+    public List<string> Suffixes { get; init; } = null!;
 }

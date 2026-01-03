@@ -1,13 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace MaksimShimshon.RestCountries.Embedded
+namespace MaksimShimshon.RestCountries.Embedded;
+
+public static class RegisterServiceExtensions
 {
-    public static class RegisterServiceExtensions
+    public static IServiceCollection AddRestCountriesServices(this IServiceCollection serviceCollection, string jsonString)
     {
-        public static IServiceCollection AddRestCountriesServices(this IServiceCollection serviceCollection, string jsonString)
-        {
-            serviceCollection.AddSingleton<IRestCountries>(p => new RestCountries(jsonString));
-            return serviceCollection;
-        }
+        serviceCollection.AddSingleton<IRestCountries>(p => new RestCountries(jsonString));
+        return serviceCollection;
     }
 }

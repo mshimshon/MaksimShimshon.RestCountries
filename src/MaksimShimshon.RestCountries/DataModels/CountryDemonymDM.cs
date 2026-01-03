@@ -1,8 +1,7 @@
-﻿namespace MaksimShimshon.RestCountries.DataModels
+﻿namespace MaksimShimshon.RestCountries.DataModels;
+
+public class CountryDemonymDM
 {
-    public class CountryDemonymDM
-    {
-        public string F { get; init; } = null!;
-        public string M { get; init; } = null!;
-    }
+    public string F { get; init; } = null!;
+    public string M { get; init; } = null!;
 }

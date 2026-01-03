@@ -1,10 +1,9 @@
 ﻿using MaksimShimshon.RestCountries.Entities.Enums;
 
-namespace MaksimShimshon.RestCountries.Entities
+namespace MaksimShimshon.RestCountries.Entities;
+
+public record class CountryFlag
 {
-    public record class CountryFlag
-    {
-        public string Value { get; init; } = null!;
-        public FlagType Type { get; init; }
-    }
+    public string Value { get; init; } = null!;
+    public FlagType Type { get; init; }
 }

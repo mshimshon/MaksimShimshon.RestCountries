@@ -1,4 +1,5 @@
-﻿namespace MaksimShimshon.RestCountries.Entities
+﻿
+namespace MaksimShimshon.RestCountries.Entities
 {
     public record class CountryLanguage
     {

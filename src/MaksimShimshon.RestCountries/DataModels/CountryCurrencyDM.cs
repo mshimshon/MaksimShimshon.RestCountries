@@ -1,8 +1,7 @@
-﻿namespace MaksimShimshon.RestCountries.DataModels
+﻿namespace MaksimShimshon.RestCountries.DataModels;
+
+public record class CountryCurrencyDM
 {
-    public record class CountryCurrencyDM
-    {
-        public string Name { get; init; } = null!;
-        public string Symbol { get; init; } = null!;
-    }
+    public string Name { get; init; } = null!;
+    public string Symbol { get; init; } = null!;
 }

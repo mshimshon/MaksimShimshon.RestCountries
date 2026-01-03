@@ -1,10 +1,9 @@
-﻿namespace MaksimShimshon.RestCountries.Entities.Enums
+﻿namespace MaksimShimshon.RestCountries.Entities.Enums;
+
+public enum FlagType
 {
-    public enum FlagType
-    {
-        AlternativeText,
-        SVG,
-        PNG,
-        Unknown
-    }
+    AlternativeText,
+    SVG,
+    PNG,
+    Unknown
 }

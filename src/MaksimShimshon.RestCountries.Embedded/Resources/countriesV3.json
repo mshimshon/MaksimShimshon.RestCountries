@@ -2085,7 +2085,7 @@
 		"independent": false,
 		"status": "officially-assigned",
 		"unMember": false,
-		"currencies": [],
+		"currencies": {},
 		"idd": {
 			"root": "",
 			"suffixes": []
@@ -7019,7 +7019,7 @@
 		"independent": false,
 		"status": "officially-assigned",
 		"unMember": false,
-		"currencies": [],
+		"currencies": {},
 		"idd": {
 			"root": "+4",
 			"suffixes": [
@@ -18653,7 +18653,7 @@
 		"independent": false,
 		"status": "officially-assigned",
 		"unMember": false,
-		"currencies": [],
+		"currencies": {},
 		"idd": {
 			"root": "",
 			"suffixes": []
@@ -22285,7 +22285,7 @@
 			]
 		},
 		"capital": [
-			"Nur-Sultan"
+			"Astana"
 		],
 		"altSpellings": [
 			"KZ",
@@ -23613,7 +23613,7 @@
 		"cca3": "UNK",
 		"cioc": "KOS",
 		"fifa": "KVX",
-		"independent": null,
+		"independent": true,
 		"status": "user-assigned",
 		"unMember": false,
 		"currencies": {
@@ -34996,7 +34996,7 @@
 			"official": "Portuguese Republic",
 			"nativeName": {
 				"por": {
-					"official": "Rep\u00fablica portugu\u00eas",
+					"official": "Rep\u00fablica Portuguesa",
 					"common": "Portugal"
 				}
 			}
@@ -35107,7 +35107,7 @@
 				"common": "Portugalia"
 			},
 			"por": {
-				"official": "Rep\u00fablica portugu\u00eas",
+				"official": "Rep\u00fablica Portuguesa",
 				"common": "Portugal"
 			},
 			"rus": {
@@ -38067,8 +38067,8 @@
 		"status": "officially-assigned",
 		"unMember": true,
 		"currencies": {
-			"SLL": {
-				"name": "Sierra Leonean leone",
+			"SLE": {
+				"name": "Leone",
 				"symbol": "Le"
 			}
 		},

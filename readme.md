@@ -79,7 +79,7 @@ A conflict has been intentionally introduced by using the same `RestCountriesEmb
 - `**Embedded**` includes **all available JSON versions**.
 - `**Data**` includes **only the targeted version reflected on the package version**.
 
-As a result, the version of the `Data` package you install will match the version of the original REST Countries JSON data available in your project.
+As a result, the version of the `Data` package you install will match the version the latest version.
 
 
 ``` cs

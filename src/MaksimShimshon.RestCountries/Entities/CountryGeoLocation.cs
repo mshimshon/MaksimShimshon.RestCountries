@@ -1,8 +1,7 @@
-﻿namespace MaksimShimshon.RestCountries.Entities
+﻿namespace MaksimShimshon.RestCountries.Entities;
+
+public record class CountryGeoLocation
 {
-    public record class CountryGeoLocation
-    {
-        public double Latitude { get; init; }
-        public double Longitude { get; init; }
-    }
+    public double Latitude { get; init; }
+    public double Longitude { get; init; }
 }

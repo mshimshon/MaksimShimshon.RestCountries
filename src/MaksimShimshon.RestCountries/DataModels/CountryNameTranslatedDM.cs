@@ -1,8 +1,7 @@
-﻿namespace MaksimShimshon.RestCountries.DataModels
+﻿namespace MaksimShimshon.RestCountries.DataModels;
+
+public record class CountryNameTranslatedDM
 {
-    public record class CountryNameTranslatedDM
-    {
-        public string Common { get; init; } = null!;
-        public string Official { get; init; } = null!;
-    }
+    public string Common { get; init; } = null!;
+    public string Official { get; init; } = null!;
 }

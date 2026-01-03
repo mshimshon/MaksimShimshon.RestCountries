@@ -1,8 +1,7 @@
-﻿namespace MaksimShimshon.RestCountries.DataModels
+﻿namespace MaksimShimshon.RestCountries.DataModels;
+
+public class CountryPostalDM
 {
-    public class CountryPostalDM
-    {
-        public string? Format { get; init; }
-        public string? Regex { get; init; }
-    }
+    public string? Format { get; init; }
+    public string? Regex { get; init; }
 }

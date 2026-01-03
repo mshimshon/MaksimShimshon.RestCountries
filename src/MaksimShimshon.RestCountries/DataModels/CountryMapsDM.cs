@@ -1,8 +1,7 @@
-﻿namespace MaksimShimshon.RestCountries.DataModels
+﻿namespace MaksimShimshon.RestCountries.DataModels;
+
+public record class CountryMapsDM
 {
-    public record class CountryMapsDM
-    {
-        public string GoogleMaps { get; init; } = null!;
-        public string OpenStreetMaps { get; init; } = null!;
-    }
+    public string GoogleMaps { get; init; } = null!;
+    public string OpenStreetMaps { get; init; } = null!;
 }
