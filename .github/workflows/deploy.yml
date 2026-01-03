@@ -58,13 +58,17 @@ jobs:
       - name: Wait for NuGet availability
         uses: nick-invision/retry@v2
         with:
-          timeout_minutes: 5
+          timeout_minutes: 10
           retry_wait_seconds: 10
-          max_attempts: 30
+          max_attempts: 60
           command: |
-            curl -s "https://api.nuget.org/v3/registration5-gz-semver2/maksimshimshon.restcountries/index.json" \
-              | jq -e --arg ver "${{ steps.get_version.outputs.version }}" \
-                '[.items[].items[].catalogEntry.version | ascii_downcase] | any(. == ($ver | ascii_downcase))'
+            RESPONSE=$(curl -s "https://api.nuget.org/v3/registration5-gz-semver2/maksimshimshon.restcountries/index.json")
+            echo "$RESPONSE" \
+              | jq -e --arg ver "${{ steps.get_version.outputs.version }}" '
+                  try [ .items[].items[].catalogEntry.version | ascii_downcase ]
+                  catch []
+                  | any(. == ($ver | ascii_downcase))'
+
 
 
 
