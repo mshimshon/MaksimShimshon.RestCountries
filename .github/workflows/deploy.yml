@@ -63,11 +63,14 @@ jobs:
           retry_wait_seconds: 10
           max_attempts: 30
           command: |
-            body=$(curl -s \
-              "https://api.nuget.org/v3/registration5-gz-semver2/maksimshimshon.restcountries/${{ steps.get_version.outputs.version }}.json")
+            body=$(curl -s --compressed \
+              -H "Accept: application/json" \
+              "https://api.nuget.org/v3/registration5-gz-semver2/maksimshimshon.restcountries/${{ steps.get_version.outputs.version }}.json" \
+              | tr -d '\000')
 
-            echo "$body" | head -c 5 | grep -q "<\?xml" && exit 1
+            echo "$body" | head -c 5 | grep -q "<?xml" && exit 1
             echo "$body" | grep -q '"@type"' || exit 1
+
 
   deploy-RestCountries-Data:
     needs: deploy-RestCountries
