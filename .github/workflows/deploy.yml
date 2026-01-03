@@ -1,4 +1,4 @@
-name: Deploy
+﻿name: Deploy
 on:
   workflow_run:
     workflows: ["Build"]
@@ -38,11 +38,15 @@ jobs:
       
       - name: Pack RestCountries
         run: dotnet pack src/MaksimShimshon.RestCountries/RestCountries.csproj -c Release --no-build -o ./artifacts
-      
+
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Push RestCountries
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: dotnet nuget push ./artifacts/MaksimShimshon.RestCountries.*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push ./artifacts/MaksimShimshon.RestCountries.*.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate
       
       - name: Wait for NuGet indexing
         run: sleep 120
@@ -79,11 +83,15 @@ jobs:
       
       - name: Pack RestCountries.Data
         run: dotnet pack src/MaksimShimshon.RestCountries.Data/RestCountries.Data.csproj -c Release --no-build -o ./artifacts
-      
+
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Push RestCountries.Data
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: dotnet nuget push ./artifacts/MaksimShimshon.RestCountries.Data.*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push ./artifacts/MaksimShimshon.RestCountries.Data.*.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate
       
   deploy-RestCountries-Embedded:
     needs: deploy-RestCountries
@@ -118,10 +126,16 @@ jobs:
       - name: Pack RestCountries.Embedded
         run: dotnet pack src/MaksimShimshon.RestCountries.Embedded/RestCountries.Embedded.csproj -c Release --no-build -o ./artifacts
       
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Push RestCountries.Embedded
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: dotnet nuget push ./artifacts/MaksimShimshon.RestCountries.Embedded.*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push ./artifacts/MaksimShimshon.RestCountries.Embedded.*.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate
       
   create-github-release:
       needs: [deploy-RestCountries, deploy-RestCountries-Data, deploy-RestCountries-Embedded]
