@@ -10,7 +10,7 @@
 		<Description>An additional package, dependent on the C# RestCountries port, providing versioned country data files (the package version matches the JSON version available) for instant access and easy installation.</Description>
 		<Version>$(GlobalVersion)</Version>
 		<Authors>Maksim Shimshon</Authors>
-		<Copyright>3.1.1</Copyright>
+		<Copyright>$(GlobalVersion)</Copyright>
 		<PackageProjectUrl>https://github.com/mshimshon/MaksimShimshon.RestCountries</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/mshimshon/MaksimShimshon.RestCountries</RepositoryUrl>
 		<ApplicationIcon>restcountries_logo.ico</ApplicationIcon>

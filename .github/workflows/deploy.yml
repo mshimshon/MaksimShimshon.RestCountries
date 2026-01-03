@@ -1,0 +1,78 @@
+name: Deploy
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types:
+      - completed
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  deploy-RestCountries:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' && 
+       github.event.workflow_run.conclusion == 'success' && 
+       github.event.workflow_run.event == 'push' &&
+       startsWith(github.event.workflow_run.head_branch, 'refs/tags/v'))
+    
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: | 
+            8.0.x
+            9.0.x
+            10.0.x
+      
+      - name: Restore dependencies
+        run: |
+          dotnet restore src/StatePulse.Net.Abstractions/StatePulse.Net.Abstractions.csproj
+      
+      - name: Build StatePulse.Net.Abstractions
+        run: dotnet build src/StatePulse.Net.Abstractions/StatePulse.Net.Abstractions.csproj -c Release --no-restore
+      
+      - name: Pack StatePulse.Net.Abstractions
+        run: dotnet pack src/StatePulse.Net.Abstractions/StatePulse.Net.Abstractions.csproj -c Release --no-build -o ./artifacts
+      
+      - name: Push StatePulse.Net.Abstractions
+        run: dotnet nuget push ./artifacts/StatePulse.Net.Abstractions.*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      - name: Wait for NuGet indexing
+        run: sleep 120
+
+  deploy-core:
+    needs: deploy-abstraction
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' && 
+       github.event.workflow_run.conclusion == 'success' && 
+       github.event.workflow_run.event == 'push' &&
+       startsWith(github.event.workflow_run.head_branch, 'refs/tags/v'))
+    
+    steps:
+
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: | 
+            8.0.x
+            9.0.x
+            10.0.x
+      
+      - name: Restore dependencies
+        run: |
+          dotnet restore src/StatePulse.NET/StatePulse.NET.csproj
+      
+      - name: Build StatePulse.NET
+        run: dotnet build src/StatePulse.NET/StatePulse.NET.csproj -c Release --no-restore
+      
+      - name: Pack StatePulse.NET
+        run: dotnet pack src/StatePulse.NET/StatePulse.NET.csproj -c Release --no-build -o ./artifacts
+      
+      - name: Push StatePulse.NET
+        run: dotnet nuget push ./artifacts/StatePulse.NET.*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
