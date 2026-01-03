@@ -5,14 +5,15 @@ on:
     types:
       - completed
   workflow_dispatch:
-
 concurrency:
   group: deploy-${{ github.sha }}
   cancel-in-progress: false
-
 jobs:
   deploy-RestCountries:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     if: |
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'workflow_run' && 
@@ -30,23 +31,26 @@ jobs:
             10.0.x
       
       - name: Restore dependencies
-        run: |
-          dotnet restore src/StatePulse.Net.Abstractions/StatePulse.Net.Abstractions.csproj
+        run: dotnet restore src/RestCountries/RestCountries.csproj
       
-      - name: Build StatePulse.Net.Abstractions
-        run: dotnet build src/StatePulse.Net.Abstractions/StatePulse.Net.Abstractions.csproj -c Release --no-restore
+      - name: Build RestCountries
+        run: dotnet build src/RestCountries/RestCountries.csproj -c Release --no-restore
       
-      - name: Pack StatePulse.Net.Abstractions
-        run: dotnet pack src/StatePulse.Net.Abstractions/StatePulse.Net.Abstractions.csproj -c Release --no-build -o ./artifacts
+      - name: Pack RestCountries
+        run: dotnet pack src/RestCountries/RestCountries.csproj -c Release --no-build -o ./artifacts
       
-      - name: Push StatePulse.Net.Abstractions
-        run: dotnet nuget push ./artifacts/StatePulse.Net.Abstractions.*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      - name: Push RestCountries
+        run: dotnet nuget push ./artifacts/RestCountries.*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+      
       - name: Wait for NuGet indexing
         run: sleep 120
 
-  deploy-core:
-    needs: deploy-abstraction
+  deploy-RestCountries-Data:
+    needs: deploy-RestCountries
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     if: |
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'workflow_run' && 
@@ -55,7 +59,8 @@ jobs:
        startsWith(github.event.workflow_run.head_branch, 'refs/tags/v'))
     
     steps:
-
+      - name: Wait for NuGet indexing
+        run: sleep 120
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
@@ -65,14 +70,50 @@ jobs:
             10.0.x
       
       - name: Restore dependencies
-        run: |
-          dotnet restore src/StatePulse.NET/StatePulse.NET.csproj
+        run: dotnet restore src/RestCountries.Data/RestCountries.Data.csproj
       
-      - name: Build StatePulse.NET
-        run: dotnet build src/StatePulse.NET/StatePulse.NET.csproj -c Release --no-restore
+      - name: Build RestCountries.Data
+        run: dotnet build src/RestCountries.Data/RestCountries.Data.csproj -c Release --no-restore
       
-      - name: Pack StatePulse.NET
-        run: dotnet pack src/StatePulse.NET/StatePulse.NET.csproj -c Release --no-build -o ./artifacts
+      - name: Pack RestCountries.Data
+        run: dotnet pack src/RestCountries.Data/RestCountries.Data.csproj -c Release --no-build -o ./artifacts
       
-      - name: Push StatePulse.NET
-        run: dotnet nuget push ./artifacts/StatePulse.NET.*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      - name: Push RestCountries.Data
+        run: dotnet nuget push ./artifacts/RestCountries.Data.*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+      
+  deploy-RestCountries-Embedded:
+    needs: deploy-RestCountries
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' && 
+       github.event.workflow_run.conclusion == 'success' && 
+       github.event.workflow_run.event == 'push' &&
+       startsWith(github.event.workflow_run.head_branch, 'refs/tags/v'))
+    
+    steps:
+      - name: Wait for NuGet indexing
+        run: sleep 120
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: | 
+            8.0.x
+            9.0.x
+            10.0.x
+      
+      - name: Restore dependencies
+        run: dotnet restore src/RestCountries.Embedded/RestCountries.Embedded.csproj
+      
+      - name: Build RestCountries.Embedded
+        run: dotnet build src/RestCountries.Embedded/RestCountries.Embedded.csproj -c Release --no-restore
+      
+      - name: Pack RestCountries.Embedded
+        run: dotnet pack src/RestCountries.Embedded/RestCountries.Embedded.csproj -c Release --no-build -o ./artifacts
+      
+      - name: Push RestCountries.Embedded
+        run: dotnet nuget push ./artifacts/RestCountries.Embedded.*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+      
