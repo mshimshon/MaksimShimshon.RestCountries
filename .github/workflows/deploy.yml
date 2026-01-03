@@ -149,37 +149,3 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: dotnet nuget push ./artifacts/MaksimShimshon.RestCountries.Embedded.*.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate
-      
-  create-github-release:
-      needs: [deploy-RestCountries, deploy-RestCountries-Data, deploy-RestCountries-Embedded]
-      runs-on: ubuntu-latest
-      permissions:
-        contents: write
-      if: |
-        github.event_name == 'workflow_dispatch' ||
-        (github.event_name == 'workflow_run' && 
-         github.event.workflow_run.conclusion == 'success' && 
-         github.event.workflow_run.event == 'push' &&
-         startsWith(github.event.workflow_run.head_branch, 'refs/tags/v'))
-    
-      steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-dotnet@v4
-          with:
-            dotnet-version: | 
-              8.0.x
-              9.0.x
-              10.0.x
-      
-        - name: Pack all packages
-          run: |
-            dotnet pack src/MaksimShimshon.RestCountries/RestCountries.csproj -c Release -o ./release-artifacts
-            dotnet pack src/MaksimShimshon.RestCountries.Data/RestCountries.Data.csproj -c Release -o ./release-artifacts
-            dotnet pack src/MaksimShimshon.RestCountries.Embedded/RestCountries.Embedded.csproj -c Release -o ./release-artifacts
-      
-        - name: Create GitHub Release
-          uses: softprops/action-gh-release@v1
-          with:
-            files: ./release-artifacts/*.nupkg
-            tag_name: ${{ github.event.workflow_run.head_branch }}
-            generate_release_notes: true
