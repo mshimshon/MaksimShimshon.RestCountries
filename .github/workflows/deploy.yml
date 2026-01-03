@@ -149,3 +149,4 @@ jobs:
           with:
             files: ./release-artifacts/*.nupkg
             tag_name: ${{ github.event.workflow_run.head_branch }}
+            generate_release_notes: true
