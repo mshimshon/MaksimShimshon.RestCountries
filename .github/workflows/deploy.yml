@@ -52,7 +52,7 @@ jobs:
         id: get_version
         run: |
           FILE=$(ls ./artifacts/*.nupkg | head -n1)
-          VERSION=$(basename "$FILE" | sed -E 's/CoreMap\.([0-9]+\.[0-9]+\.[0-9]+)\.nupkg/\1/')
+          VERSION=$(basename "$FILE" | sed -E 's/MaksimShimshon.RestCountries\.([0-9]+\.[0-9]+\.[0-9]+)\.nupkg/\1/')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Wait for NuGet availability
@@ -62,7 +62,7 @@ jobs:
           retry_wait_seconds: 10
           max_attempts: 30
           command: |
-            curl -s "https://api.nuget.org/v3/registration5-gz-semver2/CoreMap/index.json" \
+            curl -s "https://api.nuget.org/v3/registration5-gz-semver2/maksimshimshon.restcountries/index.json" \
               | grep -q "\"version\":\"${{ steps.get_version.outputs.version }}\""
 
 
